@@ -1,4 +1,3 @@
-  
 import { CHANNEL_SELECTED } from '../actions';
 
 export default function(state = null, action) {
@@ -6,7 +5,8 @@ export default function(state = null, action) {
     case CHANNEL_SELECTED: {
       return action.payload;
     }
-    default:
+    default: {
       return state;
+    }
   }
 }
