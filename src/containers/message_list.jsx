@@ -1,28 +1,33 @@
 import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { fetchMessages } from '../actions';
 
+import { fetchMessages } from '../actions';
 import Message from '../components/message';
 import MessageForm from '../containers/message_form';
-import Message from '../components/message';
 
 class MessageList extends Component {
-
   componentWillMount() {
     this.fetchMessages();
   }
+
   componentDidMount() {
     this.refresher = setInterval(this.fetchMessages, 5000);
   }
+
+  componentDidUpdate() {
+    this.list.scrollTop = this.list.scrollHeight;
+  }
+
   componentWillUnmount() {
     clearInterval(this.refresher);
   }
+
   fetchMessages = () => {
     this.props.fetchMessages(this.props.selectedChannel);
   }
 
-  render() {
+  render () {
     return (
       <div className="channel-container">
         <div className="channel-title">
@@ -38,8 +43,8 @@ class MessageList extends Component {
         <MessageForm />
       </div>
     );
-  };
-};
+  }
+}
 
 function mapStateToProps(state) {
   return {
